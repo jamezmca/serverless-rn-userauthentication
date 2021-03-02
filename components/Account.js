@@ -1,3 +1,4 @@
+import { useEasybase } from 'easybase-react';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
@@ -5,6 +6,28 @@ import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 const Account = () => {
     const [userVal, setUserVal] = useState('');
     const [passVal, setPassVal] = useState('');
+
+    const {signIn, signUp } = useEasybase();
+
+    const clearInputs = () => {
+        setUserVal("");
+        setPassVal("");
+    };
+
+    const handleSignInPress = async () => {
+        await signIn(userVal, passWal);
+        clearInputs();
+    };
+
+    const handleSignUpPress = async () => {
+        const res = await signUp(userVal, passVal, {
+            create_at: new Date().toString
+        });
+        if (res.success) {
+            await signIn(userVal, passVal);
+        };
+        clearInputs();
+    };
 
     return (
         <View style={styles.container}>

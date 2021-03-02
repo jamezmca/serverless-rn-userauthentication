@@ -2,10 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 import Router from './components/Router';
+import ebconfig from "./ebconfig"
+import { EasybaseProvider, useEasybase } from "easybase-react"
 
 export default function App() {
   return (
-    <Router />
+    <EasybaseProvider ebconfig={ebconfig}>
+      <Router />
+    </EasybaseProvider>
   );
 }
 
